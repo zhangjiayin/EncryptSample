@@ -14,8 +14,8 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * 3DES对称加密算法
  */
-public class Des3 {
-    private Des3() {
+public class TripleDes {
+    private TripleDes() {
     }
 
 

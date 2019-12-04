@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.encrypt.sample.helper.Aes;
 import com.encrypt.sample.helper.Des;
-import com.encrypt.sample.helper.Des3;
+import com.encrypt.sample.helper.TripleDes;
 import com.encrypt.sample.helper.Hmac;
 import com.encrypt.sample.helper.Rsa;
 import com.encrypt.sample.helper.Sha;
@@ -39,30 +39,14 @@ public class MainActivity extends Activity {
             Log.d(TAG, "provider: " + provider.getInfo());
         }
 
-        //Des
-        Des2 des = Des2.newInstance(iv.getBytes());
-        String a = des.encrypt(inputClearText.getBytes(), encryptKey);
-        Log.d(TAG, "DES encrypt: " + a);
-        String b = new String(des.decrypt(a, encryptKey));
-        Log.d(TAG, "DES decrypt: " + b);
-        //Rsa
-        KeyPair keyPair = Rsa2.generateRSAKeyPair(1024);
-        PublicKey publicKey = keyPair.getPublic();
-        Rsa2.printPublicKeyInfo(publicKey);
-        String e = Rsa2.encrypt(inputClearText, publicKey);
-        Log.d(TAG, "RSA encrypt: " + e);
-        PrivateKey privateKey = keyPair.getPrivate();
-        Rsa2.printPrivateKeyInfo(privateKey);
-        String f = new String(Rsa2.decrypt(e, privateKey));
-        Log.d(TAG, "RSA decrypt: " + f);
     }
 
     public void testBase64(View view) {
         //Base64
         Log.d(TAG, "Base64编码结果：" + Base64.encodeToString(inputClearText.getBytes(), Base64.DEFAULT));
-        Log.d(TAG, "自定义Base64编码结果：" + com.encrypt.sample.helper.Base64.encode(inputClearText.getBytes()));
+        Log.d(TAG, "自实现Base64编码结果：" + com.encrypt.sample.helper.Base64.encode(inputClearText.getBytes()));
         Log.d(TAG, "Base64反编码结果：" + new String(Base64.decode("YWJjMTIzNDU2Nzg55Lit5Zu95Lq6", Base64.DEFAULT)));
-        Log.d(TAG, "自定义Base64反编码结果：" + new String(com.encrypt.sample.helper.Base64.decode("YWJjMTIzNDU2Nzg55Lit5Zu95Lq6")));
+        Log.d(TAG, "自实现Base64反编码结果：" + new String(com.encrypt.sample.helper.Base64.decode("YWJjMTIzNDU2Nzg55Lit5Zu95Lq6")));
     }
 
     public void testMD5(View view) {
@@ -111,18 +95,24 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //Des
+        Des2 des = Des2.newInstance(iv.getBytes());
+        String a = des.encrypt(inputClearText.getBytes(), encryptKey);
+        Log.d(TAG, "DES encrypt: " + a);
+        String b = new String(des.decrypt(a, encryptKey));
+        Log.d(TAG, "DES decrypt: " + b);
     }
 
     public void test3DES(View view) {
         try {
-            byte[] key = Des3.generateKey();
+            byte[] key = TripleDes.generateKey();
             String base64Key = Base64.encodeToString(key, Base64.DEFAULT);
             Log.d(TAG, "key base64: " + base64Key);
 
-            byte[] encryptData = Des3.encrypt(inputClearText.getBytes(), Base64.decode(base64Key, Base64.DEFAULT));
+            byte[] encryptData = TripleDes.encrypt(inputClearText.getBytes(), Base64.decode(base64Key, Base64.DEFAULT));
             Log.d(TAG, "encrypt data base64: " + Base64.encodeToString(encryptData, Base64.DEFAULT));
 
-            byte[] decryptData = Des3.decrypt(encryptData, Base64.decode(base64Key, Base64.DEFAULT));
+            byte[] decryptData = TripleDes.decrypt(encryptData, Base64.decode(base64Key, Base64.DEFAULT));
             Log.d(TAG, "decrypt data: " + new String(decryptData));
         } catch (Exception e) {
             e.printStackTrace();
@@ -184,6 +174,17 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //Rsa
+        KeyPair keyPair2 = Rsa2.generateRSAKeyPair(1024);
+        PublicKey publicKey = keyPair2.getPublic();
+        Rsa2.printPublicKeyInfo(publicKey);
+        String e = Rsa2.encrypt(inputClearText, publicKey);
+        Log.d(TAG, "RSA encrypt: " + e);
+        PrivateKey privateKey = keyPair2.getPrivate();
+        Rsa2.printPrivateKeyInfo(privateKey);
+        String f = new String(Rsa2.decrypt(e, privateKey));
+        Log.d(TAG, "RSA decrypt: " + f);
     }
 
     public void testXOR(View view) {

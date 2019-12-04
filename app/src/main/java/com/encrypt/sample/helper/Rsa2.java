@@ -1,7 +1,5 @@
 package com.encrypt.sample.helper;
 
-import com.encrypt.sample.helper.Base64;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -299,7 +297,7 @@ public class Rsa2 {
     /**
      * 从字符串中加载公钥
      * 
-     * @param publicKeyStr
+     * @param publicKey
      *            公钥数据字符串
      * @throws Exception
      *             加载公钥时产生的异常
@@ -365,7 +363,7 @@ public class Rsa2 {
     /**
      * 从文件中加载私钥
      * 
-     * @param keyFileName
+     * @param in
      *            私钥文件名
      * @return 是否成功
      * @throws Exception

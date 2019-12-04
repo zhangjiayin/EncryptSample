@@ -49,12 +49,4 @@ public class Des2 {
         return null;
     }
 
-    /**
-     * The main method.
-     *
-     * @param args the arguments
-     */
-    public static void main(String[] args) {
-
-    }
 }
