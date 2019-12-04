@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="编码方式" />
+
+    <Button
+        android:id="@+id/btn_Base64"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="testBase64"
+        android:text="Base64"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="散列算法" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_MD5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="testMD5"
+            android:text="MD5"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_SHA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="testSHA"
+            android:text="SHA"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_HMAC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="testHMAC"
+            android:text="HMAC"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="对称加密算法" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_DES"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="testDES"
+            android:text="DES"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_DES3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="test3DES"
+            android:text="3DES"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_AES"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="testAES"
+            android:text="AES"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="非对称加密算法" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_RSA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="testRSA"
+            android:text="RSA"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="异或加密" />
+
+    <Button
+        android:id="@+id/btn_XOR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="testXOR"
+        android:text="XOR"
+        android:textAllCaps="false" />
+
+</LinearLayout>
