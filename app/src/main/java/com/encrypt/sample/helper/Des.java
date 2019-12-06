@@ -13,6 +13,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * DES对称加密算法
+ */
 public class Des {
 
     private Des() {

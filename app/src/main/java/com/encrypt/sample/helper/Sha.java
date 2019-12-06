@@ -3,6 +3,9 @@ package com.encrypt.sample.helper;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * SHA消息摘要算法
+ */
 public class Sha {
     private Sha() {
     }

@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
 
     public void testMD5(View view) {
         //MD5
-        Log.d(TAG, "Md5结果：" + Md5.MD5(inputClearText).toLowerCase());
+        Log.d(TAG, "MD5结果：" + Md5.MD5(inputClearText).toLowerCase());
     }
 
     public void testSHA(View view) {
@@ -68,13 +68,12 @@ public class MainActivity extends Activity {
 
     public void testHMAC(View view) {
         try {
-
+            Log.d(TAG, "HMACMD5 encrypt: " + Hmac.encryptMD5(inputClearText.getBytes(), encryptKey.getBytes()));
             Log.d(TAG, "HMAC1 encrypt: " + Hmac.encrypt1(inputClearText.getBytes(), encryptKey.getBytes()));
             Log.d(TAG, "HMAC224 encrypt: " + Hmac.encrypt224(inputClearText.getBytes(), encryptKey.getBytes()));
             Log.d(TAG, "HMAC256 encrypt: " + Hmac.encrypt256(inputClearText.getBytes(), encryptKey.getBytes()));
             Log.d(TAG, "HMAC384 encrypt: " + Hmac.encrypt384(inputClearText.getBytes(), encryptKey.getBytes()));
             Log.d(TAG, "HMAC512 encrypt: " + Hmac.encrypt512(inputClearText.getBytes(), encryptKey.getBytes()));
-            Log.d(TAG, "HMACMD5 encrypt: " + Hmac.encryptMD5(inputClearText.getBytes(), encryptKey.getBytes()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,7 +140,7 @@ public class MainActivity extends Activity {
 
         Log.d(TAG, "原始数据长度： " + base64Data.length);
 
-        KeyPair keyPair = Rsa.generateKeyPair(2048);
+        KeyPair keyPair = Rsa.generateKeyPair(1024);
 
         byte[] publicKeyBase64Data = Base64.encode(keyPair.getPublic().getEncoded(), Base64.DEFAULT);
         byte[] privateKeyBase64Data = Base64.encode(keyPair.getPrivate().getEncoded(), Base64.DEFAULT);
@@ -150,6 +149,7 @@ public class MainActivity extends Activity {
             long start = System.currentTimeMillis();
             byte[] encryptData = Rsa.encryptWithPublicKeyBlock(base64Data, Base64.decode(publicKeyBase64Data, Base64.DEFAULT));
             Log.d(TAG, "公钥加密耗时: " + (System.currentTimeMillis() - start));
+            Log.d(TAG, "公钥加密后密文: " + Base64.encodeToString(encryptData, Base64.DEFAULT));
             Log.d(TAG, "公钥加密后长度: " + encryptData.length);
 
             start = System.currentTimeMillis();
@@ -163,6 +163,7 @@ public class MainActivity extends Activity {
 
             encryptData = Rsa.encryptWithPrivateKeyBlock(base64Data, Base64.decode(privateKeyBase64Data, Base64.DEFAULT));
             Log.d(TAG, "私钥加密耗时: " + (System.currentTimeMillis() - start));
+            Log.d(TAG, "私钥加密后密文: " + Base64.encodeToString(encryptData, Base64.DEFAULT));
             Log.d(TAG, "私钥加密后长度: " + encryptData.length);
 
             start = System.currentTimeMillis();
@@ -189,7 +190,7 @@ public class MainActivity extends Activity {
 
     public void testXOR(View view) {
         try {
-            int key = 0x1001;
+            int key = 0x1111;
 
             byte[] encryptData = Xor.execute(inputClearText.getBytes(), key);
             Log.d(TAG, "encrypt data: " + new String(encryptData));

@@ -2,6 +2,9 @@ package com.encrypt.sample.helper;
 
 import java.security.MessageDigest;
 
+/**
+ * MD5消息摘要算法
+ */
 public class Md5 {
 
     /**

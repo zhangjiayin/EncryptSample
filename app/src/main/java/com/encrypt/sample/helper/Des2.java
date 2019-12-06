@@ -5,7 +5,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * DES对称加密算法
+ * DES对称加密算法-第2种实现
  */
 public class Des2 {
 
