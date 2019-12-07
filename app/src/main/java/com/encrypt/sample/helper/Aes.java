@@ -17,17 +17,12 @@ import javax.crypto.spec.SecretKeySpec;
  * AES对称加密算法
  */
 public class Aes {
-    private static final String CBC_PKCS1_PADDING = "Aes/CBC/PKCS5Padding";//注意加密模式不要使用ECB模式。ECB模式不安全
-    private static final String IPS = "c^Y!mrz7AYbQRriB"; //使用密码生成器生成
-
-    private Aes() {
-    }
 
     public static byte[] generateKey() {
         byte[] key = null;
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("Aes");
-            keyGenerator.init(256);
+            keyGenerator.init(128);
             return keyGenerator.generateKey().getEncoded();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -49,8 +44,10 @@ public class Aes {
 
         try {
             SecretKey secretKey = new SecretKeySpec(key, "Aes");
-            IvParameterSpec ivParameterSpec = new IvParameterSpec(IPS.getBytes()); //使用CBC模式必须制定IvParameterSpec，且expected IV length of 16，即长度限制为16
-            Cipher cipher = Cipher.getInstance(CBC_PKCS1_PADDING);
+            //使用CBC模式必须制定IvParameterSpec，且expected IV length of 16，即长度限制为16
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(key);
+            //注意加密模式不要使用ECB模式。ECB模式不安全
+            Cipher cipher = Cipher.getInstance("Aes/CBC/PKCS5Padding");
             cipher.init(opmode, secretKey, ivParameterSpec);
 
             bytes = cipher.doFinal(data);

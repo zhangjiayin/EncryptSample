@@ -12,7 +12,6 @@ import com.encrypt.sample.helper.TripleDes;
 import com.encrypt.sample.helper.Hmac;
 import com.encrypt.sample.helper.Rsa;
 import com.encrypt.sample.helper.Sha;
-import com.encrypt.sample.helper.Des2;
 import com.encrypt.sample.helper.Md5;
 import com.encrypt.sample.helper.Rsa2;
 import com.encrypt.sample.helper.Xor;
@@ -94,12 +93,6 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //Des
-        Des2 des = Des2.newInstance(iv.getBytes());
-        String a = des.encrypt(inputClearText.getBytes(), encryptKey);
-        Log.d(TAG, "DES encrypt: " + a);
-        String b = new String(des.decrypt(a, encryptKey));
-        Log.d(TAG, "DES decrypt: " + b);
     }
 
     public void test3DES(View view) {

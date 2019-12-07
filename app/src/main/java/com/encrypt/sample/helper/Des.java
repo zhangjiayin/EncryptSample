@@ -17,15 +17,8 @@ import javax.crypto.spec.SecretKeySpec;
  * DES对称加密算法
  */
 public class Des {
-
-    private Des() {
-        throw new UnsupportedOperationException("Constructor cannot be init");
-    }
-
     /**
      * 生成秘钥
-     *
-     * @return
      */
     public static byte[] generateKey() {
         try {
@@ -43,8 +36,6 @@ public class Des {
 
     /**
      * 加密
-     *
-     * @return
      */
     public static byte[] encrypt(byte[] data, byte[] key) {
         return doCipher(data, key, Cipher.ENCRYPT_MODE);
@@ -52,8 +43,6 @@ public class Des {
 
     /**
      * 解密
-     *
-     * @return
      */
     public static byte[] decrypt(byte[] data, byte[] key) {
         return doCipher(data, key, Cipher.DECRYPT_MODE);
