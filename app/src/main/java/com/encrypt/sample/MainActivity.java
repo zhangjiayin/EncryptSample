@@ -19,25 +19,17 @@ import com.encrypt.sample.helper.Xor;
 
 import java.security.KeyPair;
 import java.security.PrivateKey;
-import java.security.Provider;
 import java.security.PublicKey;
-import java.security.Security;
 
 public class MainActivity extends Activity {
     private final static String TAG = "EncryptSample";
     String inputClearText = "abc123456789中国人";
     String encryptKey = "key12345";
-    String iv = "iv123456";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Provider[] providers = Security.getProviders();
-        for (Provider provider : providers) {
-            Log.d(TAG, "provider: " + provider.getInfo());
-        }
 
     }
 
@@ -96,22 +88,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void testChaCha20(View view) {
-        try {
-            byte[] key = ChaCha20.generateKey();
-            String base64Key = Base64.encodeToString(key, Base64.DEFAULT);
-            Log.d(TAG, "key base64: " + base64Key);
-
-            byte[] encryptData = ChaCha20.encrypt(inputClearText.getBytes(), Base64.decode(base64Key, Base64.DEFAULT));
-            Log.d(TAG, "encrypt data base64: " + Base64.encodeToString(encryptData, Base64.DEFAULT));
-
-            byte[] decryptData = ChaCha20.decrypt(encryptData, Base64.decode(base64Key, Base64.DEFAULT));
-            Log.d(TAG, "decrypt data: " + new String(decryptData));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void test3DES(View view) {
         try {
             byte[] key = TripleDes.generateKey();
@@ -138,6 +114,23 @@ public class MainActivity extends Activity {
             Log.d(TAG, "encrypt data base64: " + Base64.encodeToString(encryptData, Base64.DEFAULT));
 
             byte[] decryptData = Aes.decrypt(encryptData, Base64.decode(base64Key, Base64.DEFAULT));
+            Log.d(TAG, "decrypt data: " + new String(decryptData));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void testChaCha20(View view) {
+        try {
+            byte[] key = ChaCha20.generateKey();
+            String base64Key = Base64.encodeToString(key, Base64.DEFAULT);
+            Log.d(TAG, "key base64: " + base64Key);
+
+            byte[] encryptData = ChaCha20.encrypt(inputClearText.getBytes(), Base64.decode(base64Key, Base64.DEFAULT));
+            Log.d(TAG, "encrypt data base64: " + Base64.encodeToString(encryptData, Base64.DEFAULT));
+
+            byte[] decryptData = ChaCha20.decrypt(encryptData, Base64.decode(base64Key, Base64.DEFAULT));
             Log.d(TAG, "decrypt data: " + new String(decryptData));
         } catch (Exception e) {
             e.printStackTrace();
