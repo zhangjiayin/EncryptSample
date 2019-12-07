@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.encrypt.sample.helper.Aes;
+import com.encrypt.sample.helper.ChaCha20;
 import com.encrypt.sample.helper.Des;
 import com.encrypt.sample.helper.TripleDes;
 import com.encrypt.sample.helper.Hmac;
@@ -89,6 +90,22 @@ public class MainActivity extends Activity {
             Log.d(TAG, "encrypt data base64: " + Base64.encodeToString(encryptData, Base64.DEFAULT));
 
             byte[] decryptData = Des.decrypt(encryptData, Base64.decode(base64Key, Base64.DEFAULT));
+            Log.d(TAG, "decrypt data: " + new String(decryptData));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void testChaCha20(View view) {
+        try {
+            byte[] key = ChaCha20.generateKey();
+            String base64Key = Base64.encodeToString(key, Base64.DEFAULT);
+            Log.d(TAG, "key base64: " + base64Key);
+
+            byte[] encryptData = ChaCha20.encrypt(inputClearText.getBytes(), Base64.decode(base64Key, Base64.DEFAULT));
+            Log.d(TAG, "encrypt data base64: " + Base64.encodeToString(encryptData, Base64.DEFAULT));
+
+            byte[] decryptData = ChaCha20.decrypt(encryptData, Base64.decode(base64Key, Base64.DEFAULT));
             Log.d(TAG, "decrypt data: " + new String(decryptData));
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,7 +200,7 @@ public class MainActivity extends Activity {
 
     public void testXOR(View view) {
         try {
-            int key = 0x1111;
+            int key = 0x00001111;
 
             byte[] encryptData = Xor.execute(inputClearText.getBytes(), key);
             Log.d(TAG, "encrypt data: " + new String(encryptData));

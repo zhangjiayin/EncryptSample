@@ -87,6 +87,14 @@
             android:text="AES"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btn_ChaCha20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="testChaCha20"
+            android:text="ChaCha20"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
     <TextView
